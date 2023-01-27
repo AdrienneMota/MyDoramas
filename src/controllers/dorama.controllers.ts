@@ -12,7 +12,7 @@ const doramaSchema = Joi.object({
 
 })
 
-async function createDorama(req: Request, res: Response) {
+async function createDorama(req: Request, res: Response) : Promise<void> {
     const dorama = req.body as DoramaInput
 
     try {
@@ -29,8 +29,19 @@ async function createDorama(req: Request, res: Response) {
     }
 }
 
+async function getAllDoramas(req: Request, res: Response) {
+    try {
+        const allDoramas = await doramaRepository.getDoramas()
+        res.send(allDoramas)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}
+
 const doramaController = {
-    createDorama
+    createDorama,
+    getAllDoramas
 }
 
 export default doramaController
