@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id      Int       @id @default(autoincrement())
+  name    String
+  doramas doramas[]
+}
+
+model doramas {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(50)
+  overview        String
+  grade           Int
+  category_id     Int
+  watched         Boolean
+  categories      categories        @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "doramas_fk0")
+  main_characters main_characters[]
+}
+
+model main_characters {
+  id        Int     @id @default(autoincrement())
+  name      String  @db.VarChar(50)
+  dorama_id Int
+  actor     String  @db.VarChar(50)
+  doramas   doramas @relation(fields: [dorama_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "main_characters_fk0")
+}
