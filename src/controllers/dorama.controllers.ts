@@ -20,6 +20,7 @@ async function createDorama(req: Request, res: Response) : Promise<void> {
         if(error){
             const erros = error.details.map( d => d.message)
             res.status(422).send(erros)
+            return
         }
         await doramaRepository.createDorama(dorama)
         res.sendStatus(201)
@@ -39,9 +40,31 @@ async function getAllDoramas(req: Request, res: Response) {
     }
 }
 
+async function getAllDoramasWatched(req: Request, res: Response) {
+    try {
+        const allDoramasWatched = await doramaRepository.getDoramasWatched()
+        res.send(allDoramasWatched)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}
+
+async function getAllDoramasDontWatched(req: Request, res: Response) {
+    try {
+        const doramasDontWatched = await doramaRepository.getDoramasDontWatched()
+        res.send(doramasDontWatched)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}
+
 const doramaController = {
     createDorama,
-    getAllDoramas
+    getAllDoramas,
+    getAllDoramasWatched,
+    getAllDoramasDontWatched
 }
 
 export default doramaController

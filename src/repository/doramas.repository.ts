@@ -16,10 +16,30 @@ async function createDorama( dorama : DoramaInput) {
     })
 }
 
+async function getDoramasWatched() {
+    const data =  await prisma.doramas.findMany({
+        where: {
+            watched : true
+        }
+    })
+    return data
+}
+
+async function getDoramasDontWatched() {
+    const data =  await prisma.doramas.findMany({
+        where: {
+            watched : false
+        }
+    })
+    return data
+}
+
 
 const doramaRepository = {
     createDorama,
-    getDoramas
+    getDoramas,
+    getDoramasWatched,
+    getDoramasDontWatched
 }
 
 export default doramaRepository
