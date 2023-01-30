@@ -1,12 +1,11 @@
 {
-  "compilerOptions": { //configurações para poder compilar
-    "outDir": "dist", //pastinha js para roda o ts em js
-//as demais configurações são por causa dos diferentes sistemas de importação do js
-    "module": "es6",//padrão do module
-    "esModuleInterop": true, //para entender os diferentes tipos de importações
-    "moduleResolution": "node" //evitar um problema de importação
+  "compilerOptions": { 
+    "outDir": "dist", 
+    "module": "es6",
+    "esModuleInterop": true, 
+    "moduleResolution": "node" 
   },
   "ts-node": {
-    "esm": true //lendo o arquivo em ts e executando em js
+    "esm": true 
   }
 }

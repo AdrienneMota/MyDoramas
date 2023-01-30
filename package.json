@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon dist/index.js",
+    "dev": "npx nodemon dist/src/index.js",
     "prisma:migration": "npx prisma migrate dev",
     "prisma:seed": "npx prisma db seed"
   },

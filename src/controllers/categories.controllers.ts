@@ -10,7 +10,7 @@ const categorySchema = Joi.object({
 
 async function createCategory(req: Request, res: Response) : Promise <void> {
     const category = req.body as CategoryInput
-    console.log(category)
+    // console.log(category)
     try {
         const { error } = categorySchema.validate( category, { abortEarly: false})
         if(error){
