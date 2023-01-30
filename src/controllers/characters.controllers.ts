@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Joi from "joi";
-import charactersRepository, { CharacterInput } from "../repository/characters.repository.js";
+import charactersRepository, { CharacterInput, CharacterUpdate } from "../repository/characters.repository.js";
 
 const characterSchema = Joi.object({
   "name" : Joi.string().min(3).required(),
@@ -37,9 +37,35 @@ async function getAllCharaters(req: Request, res: Response) : Promise <void> {
     }
 }
 
+async function updateCharater(req: Request, res: Response) : Promise <void> {
+    const character = req.body as CharacterUpdate
+
+    try {
+        await charactersRepository.updateCharacter(character)
+        res.sendStatus(201)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}
+
+async function deleteCharater(req: Request, res: Response) : Promise <void> {
+    const characterId = parseInt(req.params.id) 
+
+    try {
+        await charactersRepository.deleteCharacterById(characterId)
+        res.sendStatus(204)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}
+
 const characterControllers = {
     createCharater,
-    getAllCharaters
+    getAllCharaters,
+    updateCharater,
+    deleteCharater
 }
 
 export default characterControllers
