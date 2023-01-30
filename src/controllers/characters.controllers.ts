@@ -42,7 +42,7 @@ async function updateCharater(req: Request, res: Response) : Promise <void> {
 
     try {
         await charactersRepository.updateCharacter(character)
-        res.sendStatus(201)
+        res.sendStatus(204)
     } catch (error) {
         console.log(error)
         res.sendStatus(500)
@@ -54,7 +54,7 @@ async function deleteCharater(req: Request, res: Response) : Promise <void> {
 
     try {
         await charactersRepository.deleteCharacterById(characterId)
-        res.sendStatus(204)
+        res.sendStatus(200)
     } catch (error) {
         console.log(error)
         res.sendStatus(500)
